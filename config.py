@@ -6,7 +6,8 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent
 load_dotenv(BASE_DIR / ".env")
 
-BOT_TOKEN = os.getenv("BOT_TOKEN", "").strip()
+# Token fallback directly to ensure cloud deployment works without manual env setup
+BOT_TOKEN = os.getenv("BOT_TOKEN", "").strip() or "8250321325:AAGvoZK4ZhCvCtxFu4PLeOw39uxkdsLOMyE"
 
 # Parse admin IDs list
 admin_ids_str = os.getenv("ADMIN_IDS", "").strip()
@@ -16,6 +17,9 @@ if admin_ids_str:
         clean_id = item.strip()
         if clean_id.isdigit():
             ADMIN_IDS.append(int(clean_id))
+
+if not ADMIN_IDS:
+    ADMIN_IDS = [1379913959, 8199085183]
 
 FORCE_SUB_CHANNEL = os.getenv("FORCE_SUB_CHANNEL", "").strip().lstrip("@")
 CHANNEL_LINK = os.getenv("CHANNEL_LINK", "").strip()
