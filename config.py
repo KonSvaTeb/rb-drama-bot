@@ -18,8 +18,9 @@ if admin_ids_str:
         if clean_id.isdigit():
             ADMIN_IDS.append(int(clean_id))
 
+# Default only account 1379913959 as Admin
 if not ADMIN_IDS:
-    ADMIN_IDS = [1379913959, 8199085183]
+    ADMIN_IDS = [1379913959]
 
 FORCE_SUB_CHANNEL = os.getenv("FORCE_SUB_CHANNEL", "").strip().lstrip("@")
 CHANNEL_LINK = os.getenv("CHANNEL_LINK", "").strip()
