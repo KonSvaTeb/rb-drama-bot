@@ -1,8 +1,20 @@
 import logging
 import sys
 import os
+import glob
 import threading
 from http.server import HTTPServer, BaseHTTPRequestHandler
+
+# Ensure current directory and all site-packages on Linux/Render are in sys.path
+current_dir = os.path.dirname(os.path.abspath(__file__))
+if current_dir not in sys.path:
+    sys.path.insert(0, current_dir)
+
+for p in glob.glob("/root/.local/lib/python*/site-packages") + \
+         glob.glob("/home/*/.local/lib/python*/site-packages") + \
+         glob.glob("/opt/render/**/site-packages", recursive=True):
+    if os.path.isdir(p) and p not in sys.path:
+        sys.path.insert(0, p)
 
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
