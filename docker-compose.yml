@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  rb_drama_bot:
+    build: .
+    container_name: rb_drama_bot
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      # រក្សាទុកទិន្នន័យ Database កុំឱ្យបាត់ពេល restart container
+      - ./data:/app/data
