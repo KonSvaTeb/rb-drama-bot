@@ -1,0 +1,15 @@
+[Unit]
+Description=RB Drama Telegram Bot Service
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/rb_drama_bot
+ExecStart=/usr/bin/python3 /root/rb_drama_bot/main.py
+Restart=always
+RestartSec=5
+EnvironmentFile=/root/rb_drama_bot/.env
+
+[Install]
+WantedBy=multi-user.target
